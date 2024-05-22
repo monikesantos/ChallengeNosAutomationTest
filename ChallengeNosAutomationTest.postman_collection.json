@@ -1,0 +1,197 @@
+{
+	"info": {
+		"_postman_id": "6f603cb5-6078-4a50-8e44-6882105172b2",
+		"name": "ChallengeNosAutomationTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19349530"
+	},
+	"item": [
+		{
+			"name": "Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"   pm.test(\"Validar schema da resposta\", function () {\r",
+							"       var schema = {\r",
+							"           \"type\": \"array\",\r",
+							"           \"items\": {\r",
+							"               \"type\": \"object\",\r",
+							"               \"properties\": {\r",
+							"                   \"id\": {\"type\": \"integer\"},\r",
+							"                   \"user_id\": {\"type\": \"integer\"},\r",
+							"                   \"title\": {\"type\": \"string\"},\r",
+							"                   \"due_on\": {\"type\": \"string\", \"format\": \"date-time\"},\r",
+							"                   \"status\": {\"type\": \"string\"}\r",
+							"               },\r",
+							"               \"required\": [\"id\", \"user_id\", \"title\", \"due_on\", \"status\"]\r",
+							"           }\r",
+							"       };\r",
+							"       pm.response.to.have.jsonSchema(schema);\r",
+							"   });\r",
+							"   \r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://gorest.co.in/public/v2/todos",
+					"protocol": "https",
+					"host": [
+						"gorest",
+						"co",
+						"in"
+					],
+					"path": [
+						"public",
+						"v2",
+						"todos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ValidarSchemaDaResposta",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"   pm.test(\"Validar schema da resposta\", function () {\r",
+							"       var schema = {\r",
+							"           \"type\": \"array\",\r",
+							"           \"items\": {\r",
+							"               \"type\": \"object\",\r",
+							"               \"properties\": {\r",
+							"                   \"id\": {\"type\": \"integer\"},\r",
+							"                   \"user_id\": {\"type\": \"integer\"},\r",
+							"                   \"title\": {\"type\": \"string\"},\r",
+							"                   \"due_on\": {\"type\": \"string\", \"format\": \"date-time\"},\r",
+							"                   \"status\": {\"type\": \"string\"}\r",
+							"               },\r",
+							"               \"required\": [\"id\", \"user_id\", \"title\", \"due_on\", \"status\"]\r",
+							"           }\r",
+							"       };\r",
+							"       pm.response.to.have.jsonSchema(schema);\r",
+							"   });\r",
+							"   \r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://gorest.co.in/public/v2/todos",
+					"protocol": "https",
+					"host": [
+						"gorest",
+						"co",
+						"in"
+					],
+					"path": [
+						"public",
+						"v2",
+						"todos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ValidacaoDeStatusCompleted",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"   pm.test(\"Todos os resultados têm status completed\", function () {\r",
+							"       let jsonData = pm.response.json();\r",
+							"       jsonData.forEach(item => {\r",
+							"           pm.expect(item.status).to.equal(\"completed\");\r",
+							"       });\r",
+							"   });\r",
+							"   \r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://gorest.co.in/public/v2/todos",
+					"protocol": "https",
+					"host": [
+						"gorest",
+						"co",
+						"in"
+					],
+					"path": [
+						"public",
+						"v2",
+						"todos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ValidacaoDedue_on",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Validar formato do campo due_on\", function () {\r",
+							"    let jsonData = pm.response.json();\r",
+							"    jsonData.forEach(item => {\r",
+							"        pm.expect(item.due_on).to.match(/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$/);\r",
+							"    });\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://gorest.co.in/public/v2/todos",
+					"protocol": "https",
+					"host": [
+						"gorest",
+						"co",
+						"in"
+					],
+					"path": [
+						"public",
+						"v2",
+						"todos"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
